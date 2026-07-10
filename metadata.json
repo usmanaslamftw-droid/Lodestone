@@ -1,0 +1,6 @@
+{
+  "name": "Lodestone",
+  "description": "A premium, magazine-style travel platform that calibrates every trip to your personal travel style, feasibility constraints, and desired automation, backed by human concierge support.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+@theme {
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  
+  --color-earth-cream: var(--theme-cream);
+  --color-earth-sand: var(--theme-sand);
+  --color-earth-charcoal: var(--theme-charcoal);
+  --color-earth-terracotta: var(--theme-terracotta);
+  --color-earth-terracotta-dark: var(--theme-terracotta-dark);
+  --color-earth-moss: var(--theme-moss);
+  --color-earth-moss-light: var(--theme-moss-light);
+  --color-earth-beige: var(--theme-beige);
+}
+
+:root {
+  /* Default: Dark Blue Theme */
+  --theme-cream: #090E1A;
+  --theme-sand: #1E293B;
+  --theme-charcoal: #F8FAFC;
+  --theme-terracotta: #38BDF8;
+  --theme-terracotta-dark: #0EA5E9;
+  --theme-moss: #10B981;
+  --theme-moss-light: #0F172A;
+  --theme-beige: #0F172A;
+}
+
+body.light-theme, html.light-theme, .light-theme {
+  /* Light Editorial Slate Theme */
+  --theme-cream: #FFFFFF;   /* Clean white background instead of beige! */
+  --theme-sand: #D9D9D2;
+  --theme-charcoal: #1A1A1A;
+  --theme-terracotta: #A13C2F;
+  --theme-terracotta-dark: #7A2E24;
+  --theme-moss: #4E604F;
+  --theme-moss-light: #E8E8DF;
+  --theme-beige: #F5F5F0;   /* Original elegant beige kept for selective tiles/contrast */
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-earth-cream);
+  color: var(--color-earth-charcoal);
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom scrollbars for the editorial feel */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-earth-cream);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-earth-sand);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-earth-terracotta);
+}
