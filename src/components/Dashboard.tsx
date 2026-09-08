@@ -77,10 +77,10 @@ export const Dashboard: React.FC<DashboardProps> = ({
   };
 
   return (
-    <div className="bg-earth-cream text-earth-charcoal font-sans min-h-screen">
+    <div className="bg-earth-cream text-earth-charcoal font-sans min-h-screen transition-colors duration-300">
       
       {/* Editorial Dashboard Banner */}
-      <div className="bg-earth-moss-light border-b border-earth-sand px-6 py-5">
+      <div className="bg-earth-moss-light/60 border-b border-earth-sand/30 px-6 py-5 transition-colors duration-300">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           
           {/* Left: Identity and Path back */}
@@ -88,19 +88,19 @@ export const Dashboard: React.FC<DashboardProps> = ({
             <div className="flex items-center space-x-2">
               <button 
                 onClick={onResetTrip}
-                className="text-xs font-semibold text-earth-charcoal/50 hover:text-earth-terracotta tracking-wider uppercase flex items-center"
+                className="text-xs font-semibold text-earth-charcoal/60 hover:text-earth-terracotta tracking-wider uppercase flex items-center transition-colors"
               >
-                <ArrowLeft className="w-3 h-3 mr-1" /> All Destinations
+                <ArrowLeft className="w-3 h-3 mr-1" /> Back to Tastemaker Portal
               </button>
               <span className="text-earth-charcoal/30">•</span>
-              <span className="font-mono text-[9px] bg-earth-sand px-2 py-0.5 rounded text-earth-terracotta font-semibold tracking-wider">
+              <span className="font-mono text-[9px] bg-earth-sand/30 px-2 py-0.5 rounded text-earth-terracotta font-semibold tracking-wider">
                 LODESTONE DASHBOARD
               </span>
             </div>
             
             <h1 className="font-serif text-3xl italic text-earth-charcoal tracking-tight font-normal flex items-center gap-2 leading-tight">
               <span>{destination.name} Odyssey</span>
-              <span className="font-sans font-light text-base text-earth-charcoal/60">by {feasibility.homeCity}</span>
+              <span className="font-sans font-light text-base text-earth-charcoal/60 font-normal">by {feasibility.homeCity}</span>
             </h1>
           </div>
 
@@ -109,15 +109,15 @@ export const Dashboard: React.FC<DashboardProps> = ({
             {/* Circular Theme Toggler */}
             <button
               onClick={onToggleTheme}
-              className="p-2.5 rounded-full border border-earth-sand bg-earth-cream hover:bg-earth-sand/30 text-earth-charcoal transition-all"
+              className="p-2.5 rounded-full border border-earth-sand/40 bg-earth-moss-light hover:bg-earth-sand/40 text-earth-charcoal transition-all shadow-xs"
               aria-label="Toggle visual layout theme"
               title="Switch Theme"
               id="btn-theme-toggle-dashboard"
             >
-              {isDark ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-earth-terracotta" />}
+              {isDark ? <Sun className="w-4 h-4 text-cyan-400" /> : <Moon className="w-4 h-4 text-earth-terracotta" />}
             </button>
 
-            <div className="flex items-center space-x-3 bg-earth-cream border border-earth-sand px-4 py-3 rounded-sm">
+            <div className="flex items-center space-x-3 bg-earth-moss-light border border-earth-sand/40 px-4 py-3 rounded-sm shadow-xs">
               <div className="w-2.5 h-2.5 rounded-full bg-earth-terracotta animate-pulse" />
               <div>
                 <p className="font-mono text-[9px] uppercase tracking-wider text-earth-charcoal/50 font-bold leading-none mb-1">
@@ -134,14 +134,14 @@ export const Dashboard: React.FC<DashboardProps> = ({
       </div>
 
       {/* Tabs Navigation */}
-      <div className="bg-earth-moss-light border-b border-earth-sand px-6">
+      <div className="bg-earth-moss-light/30 border-b border-earth-sand/30 px-6">
         <div className="max-w-7xl mx-auto flex space-x-8">
           <button
             onClick={() => setActiveTab('itinerary')}
             className={`py-4 text-xs font-mono uppercase font-bold tracking-wider border-b-2 transition-all flex items-center space-x-1.5 ${
               activeTab === 'itinerary' 
                 ? 'border-earth-terracotta text-earth-terracotta' 
-                : 'border-transparent text-earth-charcoal/50 hover:text-earth-charcoal'
+                : 'border-transparent text-earth-charcoal/50 dark:text-neutral-400 hover:text-earth-charcoal dark:hover:text-white'
             }`}
             id="tab-btn-itinerary"
           >
@@ -153,7 +153,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
             className={`py-4 text-xs font-mono uppercase font-bold tracking-wider border-b-2 transition-all flex items-center space-x-1.5 ${
               activeTab === 'concierge' 
                 ? 'border-earth-terracotta text-earth-terracotta' 
-                : 'border-transparent text-earth-charcoal/50 hover:text-earth-charcoal'
+                : 'border-transparent text-earth-charcoal/50 dark:text-neutral-400 hover:text-earth-charcoal dark:hover:text-white'
             }`}
             id="tab-btn-concierge"
           >
@@ -168,7 +168,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
             className={`py-4 text-xs font-mono uppercase font-bold tracking-wider border-b-2 transition-all flex items-center space-x-1.5 ${
               activeTab === 'profile' 
                 ? 'border-earth-terracotta text-earth-terracotta' 
-                : 'border-transparent text-earth-charcoal/50 hover:text-earth-charcoal'
+                : 'border-transparent text-earth-charcoal/50 dark:text-neutral-400 hover:text-earth-charcoal dark:hover:text-white'
             }`}
             id="tab-btn-profile"
           >
@@ -206,21 +206,21 @@ export const Dashboard: React.FC<DashboardProps> = ({
           <div className="max-w-5xl mx-auto px-4 py-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-12 gap-8 items-start" id="editable-profile-tab">
             
             {/* Left: Dynamic Radar representation (5 cols) */}
-            <div className="md:col-span-5 bg-earth-moss-light border border-earth-sand p-6 rounded shadow-xs space-y-6">
-              <h3 className="font-serif font-bold text-lg text-earth-charcoal border-b border-earth-sand pb-3">Style Matrix</h3>
+            <div className="md:col-span-5 bg-earth-sand/10 dark:bg-neutral-900 border border-earth-sand/25 dark:border-neutral-800 p-6 rounded shadow-sm space-y-6 text-left">
+              <h3 className="font-serif font-bold text-lg text-earth-charcoal dark:text-white border-b border-earth-sand/20 dark:border-neutral-800 pb-3">Style Matrix</h3>
               <RadarChart data={editProfile.interests} size={300} />
-              <div className="p-4 bg-earth-sand/20 rounded border border-earth-sand text-[11px] leading-relaxed font-light text-earth-charcoal/80">
+              <div className="p-4 bg-earth-sand/5 dark:bg-black/20 rounded border border-earth-sand/20 dark:border-neutral-800 text-[11px] leading-relaxed font-light text-earth-charcoal/80 dark:text-neutral-400">
                 Any slider updates made on the right will instantly redraw your Style coordinates and recalibrate our itinerary guidelines.
               </div>
             </div>
 
             {/* Right: Fine tuning Sliders (7 cols) */}
-            <div className="md:col-span-7 bg-earth-moss-light border border-earth-sand p-6 md:p-8 rounded shadow-xs space-y-6">
-              <div className="flex justify-between items-center border-b border-earth-sand pb-3">
-                <h3 className="font-serif font-bold text-lg text-earth-charcoal">Fine-Tune Profile Coordinates</h3>
+            <div className="md:col-span-7 bg-earth-sand/10 dark:bg-neutral-900 border border-earth-sand/25 dark:border-neutral-800 p-6 md:p-8 rounded shadow-sm space-y-6 text-left">
+              <div className="flex justify-between items-center border-b border-earth-sand/20 dark:border-neutral-800 pb-3">
+                <h3 className="font-serif font-bold text-lg text-earth-charcoal dark:text-white">Fine-Tune Profile Coordinates</h3>
                 <button
                   onClick={handleSaveProfileUpdates}
-                  className="px-4 py-2 bg-earth-terracotta hover:bg-earth-terracotta-dark text-earth-cream font-mono text-[10px] uppercase font-bold tracking-wider transition-colors rounded-sm"
+                  className="px-4 py-2 bg-earth-terracotta hover:bg-earth-terracotta-dark text-white font-mono text-[10px] uppercase font-bold tracking-wider transition-colors rounded-sm shadow-xs"
                   id="btn-save-profile-updates"
                 >
                   Save Style
@@ -228,7 +228,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
               </div>
 
               {showSaveSuccess && (
-                <div className="bg-earth-moss-light border border-earth-moss text-earth-moss p-3 rounded text-xs font-semibold uppercase tracking-wider text-center transition-all">
+                <div className="bg-earth-sand/20 dark:bg-neutral-800 border border-earth-terracotta/35 text-earth-terracotta p-3 rounded text-xs font-semibold uppercase tracking-wider text-center transition-all">
                   ✓ Profile Coordinates Recalibrated Successfully
                 </div>
               )}
@@ -237,7 +237,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
               <div className="space-y-5">
                 {/* Sliders 1: Pace */}
                 <div className="space-y-2">
-                  <div className="flex justify-between text-xs font-semibold">
+                  <div className="flex justify-between text-xs font-semibold text-earth-charcoal dark:text-neutral-200">
                     <span>Desired Daily Pace</span>
                     <span className="font-mono text-earth-terracotta font-bold">{editProfile.pace}%</span>
                   </div>
@@ -247,13 +247,13 @@ export const Dashboard: React.FC<DashboardProps> = ({
                     max="100"
                     value={editProfile.pace}
                     onChange={(e) => handleSliderChange('pace', parseInt(e.target.value))}
-                    className="w-full h-1.5 bg-earth-sand rounded appearance-none cursor-pointer accent-earth-terracotta"
+                    className="w-full h-1.5 bg-earth-sand/30 dark:bg-neutral-800 rounded appearance-none cursor-pointer accent-earth-terracotta"
                   />
                 </div>
 
                 {/* Slider 2: RestRatio */}
                 <div className="space-y-2">
-                  <div className="flex justify-between text-xs font-semibold">
+                  <div className="flex justify-between text-xs font-semibold text-earth-charcoal dark:text-neutral-200">
                     <span>Rest Days Ratio</span>
                     <span className="font-mono text-earth-terracotta font-bold">{editProfile.restRatio}%</span>
                   </div>
@@ -263,13 +263,13 @@ export const Dashboard: React.FC<DashboardProps> = ({
                     max="100"
                     value={editProfile.restRatio}
                     onChange={(e) => handleSliderChange('restRatio', parseInt(e.target.value))}
-                    className="w-full h-1.5 bg-earth-sand rounded appearance-none cursor-pointer accent-earth-terracotta"
+                    className="w-full h-1.5 bg-earth-sand/30 dark:bg-neutral-800 rounded appearance-none cursor-pointer accent-earth-terracotta"
                   />
                 </div>
 
                 {/* Slider 3: Structure Preference */}
                 <div className="space-y-2">
-                  <div className="flex justify-between text-xs font-semibold">
+                  <div className="flex justify-between text-xs font-semibold text-earth-charcoal dark:text-neutral-200">
                     <span>Structure & Scheduled Blueprint</span>
                     <span className="font-mono text-earth-terracotta font-bold">{editProfile.structurePreference}%</span>
                   </div>
@@ -279,19 +279,19 @@ export const Dashboard: React.FC<DashboardProps> = ({
                     max="100"
                     value={editProfile.structurePreference}
                     onChange={(e) => handleSliderChange('structurePreference', parseInt(e.target.value))}
-                    className="w-full h-1.5 bg-earth-sand rounded appearance-none cursor-pointer accent-earth-terracotta"
+                    className="w-full h-1.5 bg-earth-sand/30 dark:bg-neutral-800 rounded appearance-none cursor-pointer accent-earth-terracotta"
                   />
                 </div>
 
                 {/* Interests divider */}
-                <div className="h-px bg-earth-sand my-4" />
-                <span className="font-mono text-[10px] uppercase tracking-widest text-earth-charcoal/40 font-bold block">
+                <div className="h-px bg-earth-sand/20 dark:bg-neutral-800 my-4" />
+                <span className="font-mono text-[10px] uppercase tracking-widest text-earth-charcoal/40 dark:text-neutral-500 font-bold block">
                   INTEREST GRADIENTS
                 </span>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-semibold">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-semibold text-earth-charcoal/85 dark:text-neutral-300">
                   {/* Culinary */}
-                  <div className="space-y-2">
+                  <div className="space-y-2 text-left">
                     <div className="flex justify-between">
                       <span>Culinary & Dining</span>
                       <span className="font-mono text-earth-terracotta">{editProfile.interests.food}%</span>
@@ -302,12 +302,12 @@ export const Dashboard: React.FC<DashboardProps> = ({
                       max="100"
                       value={editProfile.interests.food}
                       onChange={(e) => handleSliderChange('interests.food', parseInt(e.target.value))}
-                      className="w-full h-1 bg-earth-sand rounded appearance-none cursor-pointer accent-earth-terracotta"
+                      className="w-full h-1 bg-earth-sand/30 dark:bg-neutral-800 rounded appearance-none cursor-pointer accent-earth-terracotta"
                     />
                   </div>
 
                   {/* Nature */}
-                  <div className="space-y-2">
+                  <div className="space-y-2 text-left">
                     <div className="flex justify-between">
                       <span>Nature & Wilderness</span>
                       <span className="font-mono text-earth-terracotta">{editProfile.interests.nature}%</span>
@@ -318,12 +318,12 @@ export const Dashboard: React.FC<DashboardProps> = ({
                       max="100"
                       value={editProfile.interests.nature}
                       onChange={(e) => handleSliderChange('interests.nature', parseInt(e.target.value))}
-                      className="w-full h-1 bg-earth-sand rounded appearance-none cursor-pointer accent-earth-terracotta"
+                      className="w-full h-1 bg-earth-sand/30 dark:bg-neutral-800 rounded appearance-none cursor-pointer accent-earth-terracotta"
                     />
                   </div>
 
                   {/* Culture */}
-                  <div className="space-y-2">
+                  <div className="space-y-2 text-left">
                     <div className="flex justify-between">
                       <span>History & Arts</span>
                       <span className="font-mono text-earth-terracotta">{editProfile.interests.culture}%</span>
@@ -334,12 +334,12 @@ export const Dashboard: React.FC<DashboardProps> = ({
                       max="100"
                       value={editProfile.interests.culture}
                       onChange={(e) => handleSliderChange('interests.culture', parseInt(e.target.value))}
-                      className="w-full h-1 bg-earth-sand rounded appearance-none cursor-pointer accent-earth-terracotta"
+                      className="w-full h-1 bg-earth-sand/30 dark:bg-neutral-800 rounded appearance-none cursor-pointer accent-earth-terracotta"
                     />
                   </div>
 
                   {/* Wellness */}
-                  <div className="space-y-2">
+                  <div className="space-y-2 text-left">
                     <div className="flex justify-between">
                       <span>Wellness & Rest</span>
                       <span className="font-mono text-earth-terracotta">{editProfile.interests.wellness}%</span>
@@ -350,14 +350,14 @@ export const Dashboard: React.FC<DashboardProps> = ({
                       max="100"
                       value={editProfile.interests.wellness}
                       onChange={(e) => handleSliderChange('interests.wellness', parseInt(e.target.value))}
-                      className="w-full h-1 bg-earth-sand rounded appearance-none cursor-pointer accent-earth-terracotta"
+                      className="w-full h-1 bg-earth-sand/30 dark:bg-neutral-800 rounded appearance-none cursor-pointer accent-earth-terracotta"
                     />
                   </div>
                 </div>
 
                 {/* Stays selector */}
-                <div className="space-y-3 pt-4">
-                  <label className="text-xs font-semibold block">Social Companionship Mode</label>
+                <div className="space-y-3 pt-4 text-left">
+                  <label className="text-xs font-semibold block text-earth-charcoal dark:text-neutral-200">Social Companionship Mode</label>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                     {SOCIAL_MODES_LIST.map((mode) => (
                       <button
@@ -365,8 +365,8 @@ export const Dashboard: React.FC<DashboardProps> = ({
                         onClick={() => handleSelectChange('socialMode', mode.id)}
                         className={`p-2.5 border rounded-sm text-center text-[10px] uppercase font-mono font-bold transition-all ${
                           editProfile.socialMode === mode.id
-                            ? 'border-earth-terracotta bg-earth-sand text-earth-terracotta'
-                            : 'border-earth-sand bg-white hover:border-earth-charcoal/35'
+                            ? 'border-earth-terracotta bg-earth-sand/20 dark:bg-neutral-800 text-earth-terracotta'
+                            : 'border-earth-sand/25 dark:border-neutral-800 bg-earth-sand/5 dark:bg-neutral-950 text-earth-charcoal/60 dark:text-neutral-400 hover:border-earth-terracotta/30'
                         }`}
                       >
                         {mode.label.split(' ')[0]}

@@ -32,7 +32,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
   handlePlaygroundSendCustom,
 }) => {
   return (
-    <section id="playground" className="w-full bg-gradient-to-b from-white via-indigo-50/15 to-white py-20 lg:py-28 border-y border-earth-sand/30">
+    <section id="playground" className="w-full bg-earth-sand/10 py-20 lg:py-28 border-y border-earth-sand/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="lg:grid lg:grid-cols-12 lg:gap-16 items-center">
         
@@ -40,26 +40,26 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
         <div className="lg:col-span-5 space-y-6 text-left">
           <span className="font-mono text-xs text-earth-terracotta font-bold uppercase tracking-widest">Try it Live</span>
           <h2 className="font-serif text-3xl sm:text-4xl text-earth-charcoal leading-tight tracking-tight">
-            Test-drive your Ground Steward interaction.
+            Test-drive Ground Stewardship & Verification.
           </h2>
           <div className="w-12 h-0.5 bg-earth-terracotta" />
           <p className="text-sm text-earth-charcoal/80 leading-relaxed font-light">
-            Unlike static checklists or robotic bots, Lodestone gives you a designated concierge ready on the ground. Use our interactive terminal on the right to test how she secures dinner reservations, swaps events, and safeguards your budget limits.
+            Need on-the-ground item verification or live local coordination? Use our interactive terminal on the right to test how our Ground Stewardship package verifies dinner reservations, swaps events, and safeguards your budget limits.
           </p>
           
           <div className="space-y-4 pt-2">
             <div className="flex items-start">
               <div className="w-5 h-5 rounded-full bg-earth-terracotta/10 text-earth-terracotta flex items-center justify-center text-xs mr-3 mt-1 font-bold">1</div>
               <div>
-                <h4 className="text-xs font-bold text-earth-charcoal uppercase tracking-wider">Human-Executed Automations</h4>
-                <p className="text-xs text-earth-charcoal/60 font-light leading-relaxed mt-0.5">We book everything under your direct permission—no guesses, total safety.</p>
+                <h4 className="text-xs font-bold text-earth-charcoal uppercase tracking-wider">Ground Verification of Items</h4>
+                <p className="text-xs text-earth-charcoal/60 font-light leading-relaxed mt-0.5">We audit local venues and verify item availability under your direct permission.</p>
               </div>
             </div>
             <div className="flex items-start">
               <div className="w-5 h-5 rounded-full bg-earth-terracotta/10 text-earth-terracotta flex items-center justify-center text-xs mr-3 mt-1 font-bold">2</div>
               <div>
                 <h4 className="text-xs font-bold text-earth-charcoal uppercase tracking-wider">Budget Shield</h4>
-                <p className="text-xs text-earth-charcoal/60 font-light leading-relaxed mt-0.5">If an item threatens your target budget ceiling, Elena flags it instantly and provides local alternatives.</p>
+                <p className="text-xs text-earth-charcoal/60 font-light leading-relaxed mt-0.5">If an item threatens your target budget ceiling, the steward flags it instantly and provides verified local alternatives.</p>
               </div>
             </div>
           </div>

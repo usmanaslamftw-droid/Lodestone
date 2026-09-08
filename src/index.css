@@ -18,27 +18,27 @@
 }
 
 :root {
-  /* Default: Dark Blue Theme */
-  --theme-cream: #090E1A;
-  --theme-sand: #1E293B;
-  --theme-charcoal: #F8FAFC;
-  --theme-terracotta: #38BDF8;
-  --theme-terracotta-dark: #0EA5E9;
-  --theme-moss: #10B981;
-  --theme-moss-light: #0F172A;
-  --theme-beige: #0F172A;
+  /* Pitch Black & Warm Terracotta Orange Luxury Theme */
+  --theme-cream: #0B0E14;      /* Deep pitch black background */
+  --theme-sand: #1E2638;       /* Dark slate-charcoal border/divider */
+  --theme-charcoal: #F8FAFC;   /* Crisp white text for contrast */
+  --theme-terracotta: #F97316;  /* Vibrant Warm Orange Accent (#F97316 / #EA580C) */
+  --theme-terracotta-dark: #C2410C; /* Deep Terracotta Burned Orange */
+  --theme-moss: #FB923C;       /* Soft Orange-Gold accent */
+  --theme-moss-light: #111827;  /* Dark midnight card background */
+  --theme-beige: #172033;      /* Deep dark navy-charcoal panel */
 }
 
 body.light-theme, html.light-theme, .light-theme {
-  /* Light Editorial Slate Theme */
-  --theme-cream: #FFFFFF;   /* Clean white background instead of beige! */
-  --theme-sand: #D9D9D2;
-  --theme-charcoal: #1A1A1A;
-  --theme-terracotta: #A13C2F;
-  --theme-terracotta-dark: #7A2E24;
-  --theme-moss: #4E604F;
-  --theme-moss-light: #E8E8DF;
-  --theme-beige: #F5F5F0;   /* Original elegant beige kept for selective tiles/contrast */
+  /* Warm White & Terracotta Orange Editorial Theme */
+  --theme-cream: #FAF9F6;      /* Clean warm off-white canvas */
+  --theme-sand: #E2DDD5;       /* Warm neutral border */
+  --theme-charcoal: #1C1917;   /* Deep charcoal primary text */
+  --theme-terracotta: #EA580C;  /* Signature terracotta orange */
+  --theme-terracotta-dark: #C2410C;
+  --theme-moss: #D97706;       /* Warm Amber Accent */
+  --theme-moss-light: #F3EFE6;  /* Soft cream tile background */
+  --theme-beige: #EFEBE0;      /* Gentle warm panel */
 }
 
 body {
@@ -49,7 +49,7 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Custom scrollbars for the editorial feel */
+/* Custom scrollbars for the high-tech blue feel */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -64,3 +64,4 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-earth-terracotta);
 }
+

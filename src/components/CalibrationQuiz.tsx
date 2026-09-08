@@ -94,7 +94,7 @@ export const CalibrationQuiz: React.FC<ProfileHubProps> = ({
             title="Switch Theme"
             id="btn-theme-toggle"
           >
-            {isDark ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-earth-terracotta" />}
+            {isDark ? <Sun className="w-4 h-4 text-cyan-400" /> : <Moon className="w-4 h-4 text-earth-terracotta" />}
           </button>
         </div>
       </header>

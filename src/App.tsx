@@ -6,9 +6,16 @@ import { CalibrationQuiz } from './components/CalibrationQuiz';
 import { DestinationMatches } from './components/DestinationMatches';
 import { Dashboard } from './components/Dashboard';
 
+import { auth } from './lib/firebase';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { getUserProfile, saveUserProfile } from './lib/db';
+import { AuthScreen } from './components/AuthScreen';
+import { SpotifyPortal } from './components/SpotifyPortal';
+
 export default function App() {
   // 1. Core State
-  const [screen, setScreen] = useState<'landing' | 'onboarding' | 'matches' | 'dashboard'>('landing');
+  const [screen, setScreen] = useState<'landing' | 'onboarding' | 'matches' | 'dashboard' | 'auth' | 'portal'>('landing');
+  const [user, setUser] = useState<any>(null);
   const [profile, setProfile] = useState<TravelStyleProfile>(INITIAL_PROFILE);
   const [feasibility, setFeasibility] = useState<FeasibilityInputs>(INITIAL_FEASIBILITY);
   const [activeDestination, setActiveDestination] = useState<Destination | null>(null);
@@ -23,32 +30,56 @@ export default function App() {
     return saved !== 'light'; // Default to dark blue
   });
 
-  // 2. LocalStorage Persistence & Theme Sync
+  // 2. Firebase Auth Observer & LocalStorage Restore
   useEffect(() => {
-    const savedProfile = localStorage.getItem('calibrated_profile');
-    const savedFeasibility = localStorage.getItem('calibrated_feasibility');
-    const savedActiveDest = localStorage.getItem('calibrated_active_dest');
-    const savedItinerary = localStorage.getItem('calibrated_itinerary');
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      setUser(currentUser);
+      if (currentUser) {
+        // Load custom calibrated coordinates from Firestore
+        try {
+          const dbData = await getUserProfile(currentUser.uid);
+          if (dbData) {
+            setProfile(dbData.profile);
+            setFeasibility(dbData.feasibility);
+          } else {
+            // If they just logged in but have no db profile yet, save local calibrated profile
+            await saveUserProfile(currentUser.uid, profile, feasibility);
+          }
+        } catch (err) {
+          console.error("Error restoring user profile from Firestore:", err);
+        }
+        
+        // Restore active destination or screen
+        const savedScreen = localStorage.getItem('calibrated_screen');
+        if (savedScreen === 'dashboard' || savedScreen === 'matches') {
+          const savedActiveDest = localStorage.getItem('calibrated_active_dest');
+          if (savedActiveDest) {
+            setActiveDestination(JSON.parse(savedActiveDest));
+            const savedItinerary = localStorage.getItem('calibrated_itinerary');
+            if (savedItinerary) setItinerary(JSON.parse(savedItinerary));
+            setScreen(savedScreen as any);
+            return;
+          }
+        }
+        setScreen('portal');
+      } else {
+        const savedProfile = localStorage.getItem('calibrated_profile');
+        const savedFeasibility = localStorage.getItem('calibrated_feasibility');
+        if (savedProfile) setProfile(JSON.parse(savedProfile));
+        if (savedFeasibility) setFeasibility(JSON.parse(savedFeasibility));
+        setScreen('landing');
+      }
+    });
+
     const savedBookings = localStorage.getItem('calibrated_bookings');
     const savedChats = localStorage.getItem('calibrated_chats');
     const savedIsBooked = localStorage.getItem('calibrated_is_booked');
-    const savedScreen = localStorage.getItem('calibrated_screen');
 
-    if (savedProfile) setProfile(JSON.parse(savedProfile));
-    if (savedFeasibility) setFeasibility(JSON.parse(savedFeasibility));
-    if (savedActiveDest) setActiveDestination(JSON.parse(savedActiveDest));
-    if (savedItinerary) setItinerary(JSON.parse(savedItinerary));
     if (savedBookings) setBookingStatuses(JSON.parse(savedBookings));
     if (savedChats) setChatMessages(JSON.parse(savedChats));
     if (savedIsBooked) setIsBooked(JSON.parse(savedIsBooked));
-    if (savedScreen) {
-      // Direct mapped restoration of obsolete screens to onboarding/Profile Hub
-      if (savedScreen === 'feasibility') {
-        setScreen('onboarding');
-      } else {
-        setScreen(savedScreen as any);
-      }
-    }
+
+    return () => unsubscribe();
   }, []);
 
   useEffect(() => {
@@ -313,22 +344,65 @@ export default function App() {
     setBookingStatuses([]);
     setChatMessages([]);
     setIsBooked(false);
-    setScreen('matches');
+    setScreen(user ? 'portal' : 'matches');
 
     localStorage.removeItem('calibrated_active_dest');
     localStorage.removeItem('calibrated_itinerary');
     localStorage.removeItem('calibrated_bookings');
     localStorage.removeItem('calibrated_chats');
     localStorage.removeItem('calibrated_is_booked');
-    localStorage.setItem('calibrated_screen', 'matches');
+    localStorage.setItem('calibrated_screen', user ? 'portal' : 'matches');
   };
 
   return (
     <div className="min-h-screen bg-earth-cream selection:bg-earth-terracotta/20 selection:text-earth-terracotta">
       {screen === 'landing' && (
         <LandingPage 
-          onStartCalibration={() => setScreen('onboarding')} 
-          onAdoptItinerary={handleAdoptItinerary}
+          onStartCalibration={() => setScreen(user ? 'portal' : 'auth')} 
+          onAdoptItinerary={(destId) => {
+            if (user) {
+              handleAdoptItinerary(destId);
+            } else {
+              setScreen('auth');
+            }
+          }}
+          isDark={isDark}
+          onToggleTheme={handleToggleTheme}
+          onLoginClick={() => setScreen(user ? 'portal' : 'auth')}
+          user={user}
+        />
+      )}
+
+      {screen === 'auth' && (
+        <AuthScreen
+          onAuthSuccess={(u) => {
+            setUser(u);
+            setScreen('portal');
+          }}
+          onBackToLanding={() => setScreen('landing')}
+          isDark={isDark}
+        />
+      )}
+
+      {screen === 'portal' && user && (
+        <SpotifyPortal
+          user={user}
+          currentProfile={profile}
+          currentFeasibility={feasibility}
+          onUpdateProfile={(p) => {
+            setProfile(p);
+            saveToStorage('calibrated_profile', p);
+          }}
+          onUpdateFeasibility={(f) => {
+            setFeasibility(f);
+            saveToStorage('calibrated_feasibility', f);
+          }}
+          onPlayItinerary={handleSelectDestination}
+          onLogout={async () => {
+            await signOut(auth);
+            setUser(null);
+            setScreen('landing');
+          }}
           isDark={isDark}
           onToggleTheme={handleToggleTheme}
         />
